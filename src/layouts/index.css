@@ -1,0 +1,52 @@
+
+.normal {
+  display: flex;
+  flex-direction: column;
+  font-family: Georgia, sans-serif;
+  text-align: center;
+}
+.header {
+  font-size: 1.3rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+  display: flex;
+  color: rgb(90, 150, 238);
+  background-color: rgb(255, 255, 255);
+  flex-direction: row;
+}
+.black {
+  flex: 11;
+
+}
+.logo {
+  flex: 2;
+}
+
+.signOut {
+  flex:1;
+  text-align: center;
+}
+
+.signOut  {
+  padding-top: 15px;
+}
+
+
+.logo img{
+  width: 180px;
+  height: 40px;
+  margin: 5px;
+}
+
+
+html,body{
+  margin:0px;
+  height:100%;
+  background-color: rgb(247, 247, 247);
+}
+
+
+.content {
+  background-color: rgb(247, 247, 247);
+}
+
