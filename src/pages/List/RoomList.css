@@ -1,0 +1,30 @@
+
+.searchBur {
+    display: flex;
+    direction: column;
+}
+
+.select {
+    flex: 2;
+    margin-top: 15px;
+}
+
+.searchButton{
+    flex:1;
+    margin-top: 15px;
+}
+
+.black {
+    flex:5;
+}
+.name {
+    padding: 0px;
+    text-align: center;
+    margin-right: 5px;
+}
+.container{
+    margin: 20px 20px 0px 20px; 
+    width:100%;
+    background-color: white;
+    min-height: 600px;
+}

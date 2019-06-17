@@ -2,7 +2,7 @@ import styles from './index.css';
 import logoUrl from '../assets/logo.png';
 import { Icon } from 'antd'
 import router from 'umi/router';
-
+import Slider from '../components/Slider/Slider'
 function BasicLayout(props) {
   return (
     <div className={styles.normal}>
@@ -17,7 +17,10 @@ function BasicLayout(props) {
         </div>
       </div>
       <div className={styles.content}>
-        {props.children}
+        <Slider className={styles.slider} />
+        <div className={styles.main}>
+          {props.children}
+        </div>
       </div>
     </div>
   );

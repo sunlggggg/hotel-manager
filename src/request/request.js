@@ -6,5 +6,7 @@ async function login(data, _method) {
     return result;
 }
 
+export default login;
+
 
 

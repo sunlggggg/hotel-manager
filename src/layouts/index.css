@@ -13,6 +13,7 @@
   color: rgb(90, 150, 238);
   background-color: rgb(255, 255, 255);
   flex-direction: row;
+  margin-bottom: 20px;
 }
 .black {
   flex: 11;
@@ -47,6 +48,15 @@ html,body{
 
 
 .content {
+  display: flex;
+  direction: column;
+}
+
+.slider {
+  flex:1;
+}
+.main {
+  flex:12;
   background-color: rgb(247, 247, 247);
 }
 
