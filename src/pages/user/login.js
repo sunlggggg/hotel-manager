@@ -1,10 +1,11 @@
 
 import styles from './login.css';
-import { Input, Button, Tooltip, Form, message} from 'antd';
+import { Input, Button, Form, message} from 'antd';
 import 'antd/dist/antd.css';
-import login from '../../request/request';
-import fetch from 'node-fetch';
+import {loginRequest} from '../../request/request';
 import { Component } from 'react';
+import router from 'umi/router';
+import logoUrl from '../../assets/logo.png';
 
 
 const params = {
@@ -22,10 +23,11 @@ const onPasswordChange = function (e) {
 
 
 const submitForm = async function () {
-  const res = await fetch('/api/common/login', { method: 'POST', body: JSON.stringify(params)});
-  const result = await res.json();
-  if(result.code !== 0){
-    message.success(result.message);
+  const res = await loginRequest(params);
+  if(res.code !== 0){
+    message.success(res.message);
+  } else {
+    router.push('/room/list');
   }
 }
 
@@ -35,6 +37,9 @@ export default class Login extends Component {
     return (
       <div className={styles.total}>
         <div className={styles.normal}>
+          <div>
+            <img src={logoUrl} alt='logo' className={styles.logo}></img>
+          </div>
           <div className={styles.text}>
             账号登录
           </div>

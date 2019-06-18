@@ -11,7 +11,7 @@
 
 .searchButton{
     flex:1;
-    margin-top: 15px;
+    margin: 15px 0px 15px 0px;
 }
 
 .black {
@@ -24,7 +24,12 @@
 }
 .container{
     margin: 20px 20px 0px 20px; 
-    width:100%;
     background-color: white;
     min-height: 600px;
 }
+
+.roomlist{
+    width:95%;
+    margin: 0 auto ;
+}
+
