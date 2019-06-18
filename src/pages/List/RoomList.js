@@ -1,56 +1,62 @@
-import {Component} from 'react'
-import { Select,Button } from 'antd';
+import { Component } from 'react'
+import { Select, Button, message } from 'antd';
 import styles from './RoomList.css';
 import 'antd/dist/antd.css';
-import {RoomStatus} from '../../common/enum'
+import { RoomStatus } from '../../common/enum'
 import TopBur from '../../components/TopBur/TopBur'
 import RoomTable from '../../components/Table/Table'
+import { roomListRequst } from '../../request/request'
 
 const { Option } = Select;
 
-
-export default class Login extends Component {
+export default class RoomList extends Component {
 
     state = {
-        roomStatus:RoomStatus.ALL,
-        roomList:[]
+        roomStatus: RoomStatus.ALL,
+        roomList: [],
+        pageNo: 1,
+        pageSize: 4
     }
 
-    handleChange= (value)=>{
-        // this.setState({roomStatus:value},()=> console.log(this.state.roomStatus));
-        this.setState({roomStatus:value});
+    handleChange = (roomStatus) => {
+        this.queryRoomList(roomStatus)
+        this.setState({ roomStatus: roomStatus });
     }
 
-    searchList = (roomStatus)=>{
-        
+    queryRoomList = async (value) => {
+        const res = await roomListRequst({pageNo:this.state.pageNo,pageSize:this.state.pageSize,roomStatus:value})
+        if(res.code !==0 ){
+            message.error(res.message)
+        }
+        this.setState({roomList:res.data.roomInfos, pageNo:res.data.pageNo,total: res.data.total})
     }
 
-    render(){
-      return (
-        <div >
-           {TopBur("房间列表")}
-           <div className={styles.container}>
-                <div className={styles.searchBur}>
-                    <div className={styles.select}>
-                        <div className={styles.name} >
-                            <Select  placeholder="查询类型" defaultValue="SELL"  style={{ width: 120 }} onChange={this.handleChange}>
-                                <Option value={RoomStatus.ALL}>全部</Option>
-                                <Option value={RoomStatus.SELL}>已入住</Option>
-                                <Option value={RoomStatus.KEEP}>未入住</Option>
-                            </Select>
+    componentDidMount(){
+        this.queryRoomList(this.state.roomStatus)
+    }
+
+    render() {
+        return (
+            <div >
+                {TopBur("房间列表")}
+                <div className={styles.container}>
+                    <div className={styles.searchBur}>
+                        <div className={styles.select}>
+                            <div className={styles.name} >
+                                <Select placeholder="查询类型" defaultValue={RoomStatus.ALL} style={{ width: 120 }} onChange={this.handleChange}>
+                                    <Option value={RoomStatus.ALL}>全部</Option>
+                                    <Option value={RoomStatus.SELL}>已入住</Option>
+                                    <Option value={RoomStatus.KEEP}>未入住</Option>
+                                </Select>
+                            </div>
                         </div>
+                        <div className={styles.black}></div>
                     </div>
-                    <div className={styles.searchButton}>
-                        <Button type="primary" onClick={this.searchList(this.state.roomStatus)}>查询</Button>
+                    <div className={styles.roomlist}>
+                        <RoomTable roomList={this.state.roomList} pageNo={this.state.pageNo} total = {this.state.total}/>
                     </div>
-                    <div className={styles.black}></div>
-                </div>
-                <div className={styles.roomlist}>
-                    <RoomTable data={this.state.roomList} />
                 </div>
             </div>
-        </div>
-      );
+        );
     }
-  }
-  
+}

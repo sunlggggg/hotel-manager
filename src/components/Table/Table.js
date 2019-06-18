@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Table, Divider, Tag } from 'antd';
+import {Table, Divider, Tag,Pagination } from 'antd';
+import styles from './Table.css'
 const columns = [
     {
       title: '房间编号',
@@ -70,45 +71,21 @@ const columns = [
       ),
     },
   ];
-  
-  const data = [
-    {
-      key: '1',
-      roomNo: '6-001',
-      checkInTime: "2018-10-11",
-      checkOutTime: "2018-11-12",
-      price: 100,
-      customerName: '小黄人',
-      customerIdCard: '330677199510089814',
-      tags: ['空房'],
-    }, 
-    {
-      key: '2',
-      checkInTime: "2018-10-11",
-      checkOutTime: "2018-11-12",
-      price: 100,
-      roomNo: '6-002',
-      customerName: '康城',
-      customerIdCard: '330677199510089815',
-      tags: ['空房'],
-    },
-    {
-      key: '3',
-      checkInTime: "2018-10-11",
-      checkOutTime: "2018-11-12",
-      price: 100,
-      roomNo: '6-003',
-      customerName: '小烟枪',
-      customerIdCard: '330677199510089813',
-      tags: ['入住'],
-    },
-  ];
-  
 
+  const paginationProps = {
+    position: 'none',
+  };
 export default class RoomTable extends Component {
-    render(){
-        return(<div>
-            <Table dataSource={data} columns={columns} />;
-        </div>);
-    }
+ state = {
+   pageSize : this.props.pageSize,
+   total:this.props.total
+ } 
+  render(){
+      return(<div>
+          <Table dataSource={this.props.roomList} columns={columns} 
+           pagination={ paginationProps }
+          />
+          <Pagination defaultCurrent={1} className={styles.page} total={50} />
+      </div>);
+  }
 }

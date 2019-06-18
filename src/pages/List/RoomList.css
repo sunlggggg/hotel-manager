@@ -5,8 +5,9 @@
 }
 
 .select {
-    flex: 2;
+    flex: 1;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .searchButton{

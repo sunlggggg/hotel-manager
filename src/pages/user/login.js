@@ -25,7 +25,7 @@ const onPasswordChange = function (e) {
 const submitForm = async function () {
   const res = await loginRequest(params);
   if(res.code !== 0){
-    message.success(res.message);
+    message.error(res.message);
   } else {
     router.push('/room/list');
   }

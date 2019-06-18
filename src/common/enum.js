@@ -1,5 +1,5 @@
 export const RoomStatus = {
     SELL:'SELL',
-    KEEP:'KEPP',
+    KEEP:'KEEP',
     ALL:'ALL'
 }
