@@ -76,16 +76,30 @@ const columns = [
     position: 'none',
   };
 export default class RoomTable extends Component {
- state = {
-   pageSize : this.props.pageSize,
-   total:this.props.total
- } 
+  state = {
+    pageSize : this.props.pageSize,
+    total:this.props.total,
+    pageNo: this.props.pageNo,
+    callback:this.props.callback
+  } 
+
+  componentDidMount(){
+    console.log("did",this.state.pageNo)
+  }
+
+  handlePageChange = (pageNo,pageSize)=>{
+    console.log(this.state.pageNo, pageNo, this.state.pageSize, pageSize);
+    this.state.callback(pageNo,pageSize);
+  }
+
   render(){
+    console.log("render"+this.state.pageNo)
       return(<div>
           <Table dataSource={this.props.roomList} columns={columns} 
            pagination={ paginationProps }
           />
-          <Pagination defaultCurrent={1} className={styles.page} total={50} />
+          <Pagination onChange={this.handlePageChange} defaultCurrent={1} current={this.state.pageNo} pageSize={this.state.pageSize} className={styles.page} total={this.state.total}
+          />
       </div>);
   }
 }

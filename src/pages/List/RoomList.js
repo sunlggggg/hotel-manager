@@ -15,12 +15,18 @@ export default class RoomList extends Component {
         roomStatus: RoomStatus.ALL,
         roomList: [],
         pageNo: 1,
+        total: 50,
         pageSize: 4
     }
 
     handleChange = (roomStatus) => {
         this.queryRoomList(roomStatus)
         this.setState({ roomStatus: roomStatus });
+    }
+
+    pageChangeCallback = (newPageNo, newPageSize)=>{
+        console.log("call back", this.state.pageNo, newPageNo)
+        this.setState({pageNo:newPageNo,pageSize:newPageSize})
     }
 
     queryRoomList = async (value) => {
@@ -53,7 +59,10 @@ export default class RoomList extends Component {
                         <div className={styles.black}></div>
                     </div>
                     <div className={styles.roomlist}>
-                        <RoomTable roomList={this.state.roomList} pageNo={this.state.pageNo} total = {this.state.total}/>
+                        <RoomTable roomList={this.state.roomList} pageNo={this.state.pageNo} 
+                        pageSize={this.state.pageSize} total = {this.state.total}
+                        callback ={this.pageChangeCallback}
+                        />
                     </div>
                 </div>
             </div>
