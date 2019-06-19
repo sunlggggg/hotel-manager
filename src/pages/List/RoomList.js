@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { Select, Button, message } from 'antd';
+import { Select, message } from 'antd';
 import styles from './RoomList.css';
 import 'antd/dist/antd.css';
 import { RoomStatus } from '../../common/enum'
@@ -15,30 +15,34 @@ export default class RoomList extends Component {
         roomStatus: RoomStatus.ALL,
         roomList: [],
         pageNo: 1,
-        total: 50,
-        pageSize: 4
+        total: 1,
+        pageSize: 7
     }
 
     handleChange = (roomStatus) => {
-        this.queryRoomList(roomStatus)
+        this.queryRoomList(roomStatus, 1, this.state.pageSize)
         this.setState({ roomStatus: roomStatus });
     }
 
-    pageChangeCallback = (newPageNo, newPageSize)=>{
-        console.log("call back", this.state.pageNo, newPageNo)
-        this.setState({pageNo:newPageNo,pageSize:newPageSize})
+    pageChangeCallback = (newPageNo, newPageSize) => {
+        console.log("pageChangeCallback", newPageNo)
+        this.setState({ pageNo: newPageNo, pageSize: newPageSize })
+        this.queryRoomList(this.state.roomStatus, newPageNo, newPageSize);
     }
 
-    queryRoomList = async (value) => {
-        const res = await roomListRequst({pageNo:this.state.pageNo,pageSize:this.state.pageSize,roomStatus:value})
-        if(res.code !==0 ){
+    queryRoomList = async (roomStatus, pageNo, pageSize) => {
+        const res = await roomListRequst({ pageNo: pageNo, pageSize: pageSize, roomStatus: roomStatus })
+        if (res.code !== 0) {
             message.error(res.message)
         }
-        this.setState({roomList:res.data.roomInfos, pageNo:res.data.pageNo,total: res.data.total})
+        res.data.roomInfos.map(e => {
+            return e.operate = e.tags[0] === '空房' ? '入住' : '退房';
+        })
+        this.setState({ roomList: res.data.roomInfos, pageNo: res.data.pageNo, total: res.data.total })
     }
 
-    componentDidMount(){
-        this.queryRoomList(this.state.roomStatus)
+    componentDidMount() {
+        this.queryRoomList(this.state.roomStatus, this.state.pageNo, this.state.pageSize)
     }
 
     render() {
@@ -59,9 +63,9 @@ export default class RoomList extends Component {
                         <div className={styles.black}></div>
                     </div>
                     <div className={styles.roomlist}>
-                        <RoomTable roomList={this.state.roomList} pageNo={this.state.pageNo} 
-                        pageSize={this.state.pageSize} total = {this.state.total}
-                        callback ={this.pageChangeCallback}
+                        <RoomTable roomList={this.state.roomList} pageNo={this.state.pageNo}
+                            pageSize={this.state.pageSize} total={this.state.total}
+                            callback={this.pageChangeCallback}
                         />
                     </div>
                 </div>
