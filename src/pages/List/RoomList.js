@@ -1,10 +1,9 @@
 import { Component } from 'react'
 import { Select, message } from 'antd';
 import styles from './RoomList.css';
-import 'antd/dist/antd.css';
 import { RoomStatus } from '../../common/enum'
-import TopBur from '../../components/TopBur/TopBur'
-import RoomTable from '../../components/Table/Table'
+import TopBur from '../../components/topbur/TopBur'
+import RoomTable from '../../components/table/Table'
 import { roomListRequst } from '../../request/request'
 
 const { Option } = Select;

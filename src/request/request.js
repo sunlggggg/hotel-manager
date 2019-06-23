@@ -10,5 +10,12 @@ export async function roomListRequst(params) {
     return res.json();
 }
 
+export async function checkInRequest(params) {
+    const res = await fetch("/api/room/checkin", {method:'POST', body: JSON.stringify(params)});
+    return res.json();
+}
 
-
+export async function  checkOutRequst (params) {
+    const res = await fetch("/api/room/checkout", {method:'POST', body: JSON.stringify(params)});
+    return res.json();
+}

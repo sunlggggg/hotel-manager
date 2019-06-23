@@ -1,0 +1,1 @@
+export const CHECK_IN = 'CHECK_IN'

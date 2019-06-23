@@ -1,0 +1,16 @@
+.fromTable {
+    margin-left: 12%;
+    margin-right: 12%;
+    padding-top: 30px;
+    background-color: white;
+    width:66%;
+}
+.container{
+    margin: 20px 20px 0px 20px; 
+    background-color: white;
+    min-height: 600px;
+}
+.items {
+    text-align: left;
+    width: 100%;
+}

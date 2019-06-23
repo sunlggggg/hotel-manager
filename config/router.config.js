@@ -20,6 +20,10 @@ const routes = [
           path: '/room/list',
           component: './List/RoomList'
         },
+        {
+          path: '/room/checkin',
+          component: './checkin/CheckIn'
+        },
       ]
   },
   {

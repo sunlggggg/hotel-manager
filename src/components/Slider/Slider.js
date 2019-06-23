@@ -1,26 +1,18 @@
 import { Menu, Icon } from 'antd';
 import React from 'react';
-import 'antd/dist/antd.css';
 import styles from './Slider.css'
+import router from 'umi/router';
 const { SubMenu }  = Menu;
 
 export default class Slider extends React.Component {
-  // submenu keys of first level
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-
-  state = {
-    openKeys: ['sub1'],
-  };
-
-  onOpenChange = openKeys => {
-    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      this.setState({ openKeys });
-    } else {
-      this.setState({
-        openKeys: latestOpenKey ? [latestOpenKey] : [],
-      });
-    }
+  handleClick = e => {
+    console.log('click ', e);
+    let path ="/";
+    e.keyPath.reverse().map(p=>{
+      return path+=p+"/";
+    })
+    console.log(path)
+    router.push(path)
   };
 
   render() {
@@ -29,13 +21,13 @@ export default class Slider extends React.Component {
         <Menu
           onClick={this.handleClick}
           style={{ width: 180 }}
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          defaultSelectedKeys={['list']}
+          defaultOpenKeys={['room']}
           mode="inline"
           className={styles.menu}
         >
           <SubMenu
-            key="sub1"
+            key="room"
             title={
               <span>
                 <Icon type="home" />
@@ -43,7 +35,7 @@ export default class Slider extends React.Component {
               </span>
             }
           >
-            <Menu.Item key="roomList">房间列表</Menu.Item>
+            <Menu.Item selectable={true} key="list">房间列表</Menu.Item>
             <Menu.Item key="checkIn">入住登记</Menu.Item>
           </SubMenu>
           </Menu>

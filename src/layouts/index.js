@@ -3,8 +3,13 @@ import logoUrl from '../assets/logo.png';
 import { Icon } from 'antd'
 import router from 'umi/router';
 import Slider from '../components/Slider/Slider'
+import { Provider } from 'react-redux'
+import { store } from '../store';
+
+
 function BasicLayout(props) {
   return (
+    <Provider store={store}>
     <div className={styles.normal}>
       <div className={styles.header}>
         <div className={styles.logo}>
@@ -23,6 +28,7 @@ function BasicLayout(props) {
         </div>
       </div>
     </div>
+    </Provider>
   );
 }
 
