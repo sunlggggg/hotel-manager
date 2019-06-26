@@ -32,7 +32,7 @@ class RegistrationForm extends React.Component {
           customerName:values.name,
           customerIdCard:values.idCard,
           checkInTime:values.dates[0].format('X'),
-          checkOutIime:values.dates[1].format('X')
+          checkOutTime:values.dates[1].format('X')
         });
         console.log(res)
         if(res.code !== 0){
